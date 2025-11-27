@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     flatpickr("#calendario", {
         dateFormat: "Y-m-d",
-        maxDate: "today",
+        maxDate: "today", // maxima fecha hoy
         defaultDate: "today"
-    });
+    });   
 });
 
 const apiKey = "Vaqi7NS9GFoC4pvgD4dsjBxhPctg7zrO1TkXwuE6"; 
