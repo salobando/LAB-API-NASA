@@ -43,8 +43,8 @@ function buscarImagen() {
     const fecha = document.getElementById("calendario").value;
     alert(fecha);
     alert(url);
-    const urlFecha = const url = `https://api.nasa.gov/planetary/apod?date=${fecha]&api_key=${apiKey}`;
-    alert(urlFecha);
+    //const urlFecha = const url = `https://api.nasa.gov/planetary/apod?date=${fecha]&api_key=${apiKey}`;
+    //alert(urlFecha);
     
     if (fecha === "") {
         alert("Ingrese una fecha");
