@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.7.2/dist/css/tempus-dominus.min.css">
     <title> Astronomy Picture of the Day</title>
+</head>
+<body>
     <h2 id="title"></h2>
-    <p id="date"></p>
-
-    
+    <p id="date"></p>    
     <div id="media"></div>
-
     <p id="explanation"></p>
 
-    <script src="script.js"></script>
+    <div class="d-flex justify-content-center">
+        <p>Prueba</p>
+        <div
+            class="border rounded"
+            data-coreui-locale="en-US"
+            data-coreui-start-date="2024/02/13"
+            data-coreui-toggle="calendar"
+        >
+        </div>
+    </div>
 
-</head>
-<body>    
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.7.2/dist/js/tempus-dominus.min.js"></script>
 </body>
 </html>
