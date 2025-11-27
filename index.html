@@ -1,44 +1,33 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astronomy Picture of the Day</title>
-    <link rel="stylesheet" href="style.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.7.2/dist/css/tempus-dominus.min.css">
-
-
-</head>
-
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> 
+</head> 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold text-brand" href="index.html"><img src="./img/imgLogo.png"
-                        alt="Logo de la Tienda" width="80" height="80" class="d-inline-block align-top">
+                <a class="navbar-brand fw-bold text-brand" href="index.html">
+                    <img src="./img/imgLogo.png" alt="Logo" width="80" height="80">
                 </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-expanded="false" aria-label="Tooggle navigation">
+ 
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+ 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#cards APOD">Imagenes APOD</a>
+                            <a class="nav-link" href="#apod">Imagen APOD</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#favoritos">Favoritos</a>
@@ -47,49 +36,33 @@
                 </div>
             </div>
         </nav>
-    </header>
-    <div>
-        <div id="inicio">
-            <img src="./img/imagenNasa.png" class="img-fluid w-100" alt="Imagen NASA">
-        </div>
-        <div id="cards APOD">
-            <h2 id="title"></h2>
-            <p id="date"></p>
-            <div id="media"></div>
-            <p id="explanation"></p>
-
-            <div class="d-flex justify-content-center">
-                <p>Prueba</p>
-                <div class="border rounded" data-coreui-locale="en-US" data-coreui-start-date="2024/02/13"
-                    data-coreui-toggle="calendar">
-                </div>
-            </div>
-            <!--Mostrar Calendario-->
-            <h5 class="mt-4">Selecciona una fecha:</h5>
-            <input type="text" id="calendario" class="form-control w-25" placeholder="Click para elegir fecha">
-
-        </div>
-
-        <div id="favoritos">
-            <div id="favoritos" class="d-flex justify-content-center">
-
-                <!--Mostrar lista de favoritos APOD-->
-
-            </div>
-        </div>
+    </header> 
+ 
+    <div id="inicio">
+        <img src="./img/imagenNasa.png" class="img-fluid w-100" alt="Imagen NASA">
+    </div>   
+    <div id="apod" class="container mt-4 text-center">
+        <h2 id="title"></h2>
+        <p id="date"></p>
+ 
+        <div id="media" class="my-3"></div>
+ 
+        <p id="explanation" class="mt-3"></p>
+ 
+        <h5 class="mt-4">Selecciona una fecha:</h5>
+        <input type="text" id="calendario" class="form-control w-25 mx-auto" placeholder="Click para elegir fecha">
+        <button type="submit" onclick="buscarImagen()" class="btn btn-primary mt-3">Buscar imagen</button>
+        <button type="submit" onclick="guardarFavorito()" class="btn btn-primary mt-3">Guardar en Favoritos</button>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.7.2/dist/js/tempus-dominus.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- JS Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- JS Flatpickr -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-    <script src="script.js"></script>
-
-
-</body>
-
-</html>
+ 
+    <div class="container mt-5">
+        <h3 class="text-center">Favoritos</h3>
+        <div id="favoritos" class="d-flex flex-wrap justify-content-center gap-4"></div>
+    </div>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>   
+    <script src="script.js"></script> 
+</body> 
+</html> 
+ 

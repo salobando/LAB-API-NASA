@@ -11,6 +11,7 @@ const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
 let imagenSeleccionada = null;
 
+
 fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -20,13 +21,11 @@ fetch(url)
 
         const mediaDiv = document.getElementById("media");
 
-          if (data.media_type === "image") {
+        if (data.media_type === "image") {
             mediaDiv.innerHTML = `<img src="${data.url}" width="600">`;
-        }
-       
-        else if (data.media_type === "video") {
+        } else if (data.media_type === "video") {
             mediaDiv.innerHTML = `<iframe width="600" height="400" src="${data.url}" frameborder="0" allowfullscreen></iframe>`;
-        }
+        } 
 
         imagenSeleccionada = {
             title: data.title,
@@ -38,6 +37,52 @@ fetch(url)
     .catch(error => {
         console.error("Error al obtener APOD:", error);
     });
+
+
+function buscarImagen() {
+    const fecha = document.getElementById("calendario").value;
+    alert(fecha);
+    alert(url);
+    const urlFecha = const url = `https://api.nasa.gov/planetary/apod?date=${fecha]&api_key=${apiKey}`;
+    alert(urlFecha);
+    
+    if (fecha === "") {
+        alert("Ingrese una fecha");
+        return;
+    }
+
+    fetch(url)
+        .then(function(response) {
+            alert("Entro00");
+            if (!response.ok) {
+                alert("Imagen no encontrada");
+                return null;
+            }
+            return response.json();
+            alert("Entro01");
+        })    
+        .then(function(data) {
+            if(!data) return
+
+            alert("Entro02");
+            alert(data.title);
+            alert(data.date);   
+            imagenSeleccionada = {
+                title: data.title,
+                date: data.date,
+                explanation: data.explanation,
+                img: data.url
+            };
+
+            const resultado = document.getElementById("favorito");
+            resultado.innerHTML = `<img src="${imagenSeleccionada.img}">
+                <h2>${imagenSeleccionada.title}</h2>
+            `;
+        })
+        .catch(function(error) {
+            alert("Error en la búsqueda.");
+        });
+}
 
  
 function guardarFavorito() {
