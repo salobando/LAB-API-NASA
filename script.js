@@ -1,90 +1,58 @@
 document.addEventListener("DOMContentLoaded", () => {
     flatpickr("#calendario", {
         dateFormat: "Y-m-d",
-        maxDate: "today", // maxima fecha hoy
-        defaultDate: "today"
-    });   
+        maxDate: "today",
+        defaultDate: "today",
+        onChange: function (selectedDates, dateStr) {
+            cargarAPOD(dateStr);
+        }
+    });
+
+    cargarAPOD();
 });
 
-const apiKey = "Vaqi7NS9GFoC4pvgD4dsjBxhPctg7zrO1TkXwuE6"; 
-const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+const apiKey = "Vaqi7NS9GFoC4pvgD4dsjBxhPctg7zrO1TkXwuE6";
 
 let imagenSeleccionada = null;
 
+//--------------------------------------------------------------------------------------
 
-fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("title").textContent = data.title;
-        document.getElementById("date").textContent = data.date;
-        document.getElementById("explanation").textContent = data.explanation;
+function cargarAPOD(fecha = "") {
+    let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
-        const mediaDiv = document.getElementById("media");
-
-        if (data.media_type === "image") {
-            mediaDiv.innerHTML = `<img src="${data.url}" width="600">`;
-        } else if (data.media_type === "video") {
-            mediaDiv.innerHTML = `<iframe width="600" height="400" src="${data.url}" frameborder="0" allowfullscreen></iframe>`;
-        } 
-
-        imagenSeleccionada = {
-            title: data.title,
-            date: data.date,
-            explanation: data.explanation,
-            img: data.url
-        };
-    })
-    .catch(error => {
-        console.error("Error al obtener APOD:", error);
-    });
-
-
-function buscarImagen() {
-    const fecha = document.getElementById("calendario").value;
-    alert(fecha);
-    alert(url);
-    //const urlFecha = const url = `https://api.nasa.gov/planetary/apod?date=${fecha]&api_key=${apiKey}`;
-    //alert(urlFecha);
-    
-    if (fecha === "") {
-        alert("Ingrese una fecha");
-        return;
+    if (fecha !== "") {
+        url += `&date=${fecha}`;
     }
 
     fetch(url)
-        .then(function(response) {
-            alert("Entro00");
-            if (!response.ok) {
-                alert("Imagen no encontrada");
-                return null;
-            }
-            return response.json();
-            alert("Entro01");
-        })    
-        .then(function(data) {
-            if(!data) return
+        .then(resp => resp.json())
+        .then(data => {
+            document.getElementById("title").textContent = data.title;
+            document.getElementById("date").textContent = data.date;
+            document.getElementById("explanation").textContent = data.explanation;
 
-            alert("Entro02");
-            alert(data.title);
-            alert(data.date);   
+            const mediaDiv = document.getElementById("media");
+
+            if (data.media_type === "image") {
+                mediaDiv.innerHTML = `<img src="${data.url}" class="img-fluid" width="600">`;
+            } else if (data.media_type === "video") {
+                mediaDiv.innerHTML = `
+<iframe width="600" height="400" src="${data.url}"
+frameborder="0" allowfullscreen></iframe>`;
+            }
+
             imagenSeleccionada = {
                 title: data.title,
                 date: data.date,
                 explanation: data.explanation,
                 img: data.url
             };
-
-            const resultado = document.getElementById("favorito");
-            resultado.innerHTML = `<img src="${imagenSeleccionada.img}">
-                <h2>${imagenSeleccionada.title}</h2>
-            `;
         })
-        .catch(function(error) {
-            alert("Error en la búsqueda.");
-        });
+        .catch(err => console.error("Error APOD:", err));
 }
 
- 
+// ----------------------------------------------------------------------------------
+
 function guardarFavorito() {
     if (!imagenSeleccionada) {
         alert("Selecciona una imagen");
@@ -92,34 +60,40 @@ function guardarFavorito() {
     }
 
     let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-    const repetido = favoritos.some(function(p) {
-        return p.title === imagenSeleccionada.title
-    });
+
+    const repetido = favoritos.some(p => p.date === imagenSeleccionada.date);
 
     if (repetido) {
-        alert("La imagen ya está ingresada en favoritos");
+        alert("Ya está en favoritos");
         return;
     }
 
     favoritos.push(imagenSeleccionada);
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
+
     actualizarListaFavoritos();
 }
 
-
+//----------------------------------------------------------------------------------------
 function actualizarListaFavoritos() {
-    const favs = JSON.parse(localStorage.getItem("favoritos")) || [];
-    const contenedor = document.getElementById("favoritos");
-    contenedor.innerHTML = "";
+    const lista = JSON.parse(localStorage.getItem("favoritos")) || [];
+    const cont = document.getElementById("favoritos");
 
-    favs.forEach(p => {
+    cont.innerHTML = "";
+
+    lista.forEach(p => {
         const div = document.createElement("div");
-        div.className = "imagen-card listaFavoritos";
+        div.className = "card p-2";
+        div.style.width = "250px";
+
         div.innerHTML = `
-            <img src="${p.image}" />
-            <h3>${p.title}</h3>
-        `;
-        contenedor.appendChild(div);
+<img src="${p.img}" class="img-fluid">
+<h6 class="mt-2">${p.title}</h6>
+<p class="text-muted">${p.date}</p>
+`;
+
+        cont.appendChild(div);
     });
 }
 
+actualizarListaFavoritos();

@@ -1,13 +1,11 @@
 body {
     font-family: 'Montserrat', sans-serif; /* fuente */
-    margin: 0;             /* reseteo por si acaso */
-    padding-top: 110px;    /* deja espacio debajo del navbar fijo */
+   padding-top: 110px;    /* deja espacio debajo del navbar fijo */
     padding-left: 20px;    /* margen opcional */
     padding-right: 20px;   /* margen opcional */
 }
 #Inicio img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Recorte elegante */
     object-position: center; /* Centra la imagen */
 }
