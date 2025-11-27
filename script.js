@@ -1,11 +1,11 @@
-flatpickr("#calendario", {
-    dateFormat: "Y-m-d",
-    minDate: "today"
+document.addEventListener("DOMContentLoaded", () => {
+    flatpickr("#calendario", {
+        dateFormat: "Y-m-d",
+        maxDate: "today",
+        defaultDate: "today"
+    });
 });
-const calendarElementList = Array.prototype.slice.call(document.querySelectorAll('.calendar'))
-const calendarList = calendarElementList.map(calendarEl => {
-  return new coreui.Calendar(calendarEl)
-})
+
 const apiKey = "Vaqi7NS9GFoC4pvgD4dsjBxhPctg7zrO1TkXwuE6"; 
 const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
